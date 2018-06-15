@@ -18,7 +18,8 @@ def create_or_edit_post(request, pk=None):
         form = PostForm(request.POST, request.FILES, instance=post)
         if form.is_valid():
             post = form.save()
-            return redirect(post_detail, post.pk)
+            return redirect('/')
+            # return redirect(post_detail, post.pk)
     else:
         form = PostForm(instance=post)
     return render(request, 'posts/blogpostform.html', {'form': form})
