@@ -20,9 +20,10 @@ from posts.views import get_index
 from django.views.generic import RedirectView
 from django.views.static import serve
 from .settings import MEDIA_ROOT
+from posts import urls as posts_urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', get_index),
-    url(r'^media/(?P<path>.*)$', serve, {'document_root': MEDIA_ROOT })
+    path('', include(posts_urls)),
+    path('media/<path:path>', serve, {'document_root': MEDIA_ROOT })
 ]
