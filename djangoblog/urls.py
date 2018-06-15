@@ -15,9 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf.urls import url, include
 from posts.views import get_index
+from django.views.generic import RedirectView
+from django.views.static import serve
+from .settings import MEDIA_ROOT
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('^$', get_index),
+    path('', get_index),
+    url(r'^media/(?P<path>.*)$', serve, {'document_root': MEDIA_ROOT })
 ]
