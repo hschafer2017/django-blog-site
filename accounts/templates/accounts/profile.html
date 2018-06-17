@@ -2,6 +2,8 @@
 {% load bootstrap_tags %}
 {% load static from staticfiles %}
 {% block content %}
-<h1>Profile Page</h1>
+<h3>Profile</h3>
+<p>Welcome to your BookWorm library, {{user}}!</p>
+<p>{{user.email}}</p>
 
 {% endblock content %}
