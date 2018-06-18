@@ -1,9 +1,9 @@
 from django.urls import path
-from posts.views import get_index, create_or_edit_post, post_detail
+from posts.views import get_index, edit_post, new_post, post_detail
 
 urlpatterns = [
-    path('new/', create_or_edit_post, name='new_post'),
-    path('<pk>/', post_detail, name='post_detail'),
-    path('<pk>/edit', create_or_edit_post, name='edit_posts'),
-    path('', get_index, name='get_posts')
+    path('new/', new_post, name='new_post'),
+    path('<int:pk>/edit', edit_post, name='edit_post'),
+    path('<int:pk>/', post_detail, name='post_detail'),
+    path('', get_index, name='get_posts'),
     ]
