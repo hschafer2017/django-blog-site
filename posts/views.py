@@ -4,7 +4,10 @@ from .forms import PostForm
 
 # Create your views here.
 def get_index(request): 
-    blogs = Post.objects.all()
+    if request.user.is_authenticated:
+        blogs = Post.objects.filter(owner=request.user)
+    else: 
+        blogs = Post.objects.all()
     return render(request, 'posts/index.html', {'blogs': blogs})
 
 def create_or_edit_post(request, pk=None):
@@ -17,7 +20,10 @@ def create_or_edit_post(request, pk=None):
     if request.method == "POST":
         form = PostForm(request.POST, request.FILES, instance=post)
         if form.is_valid():
-            post = form.save()
+            post = form.save(commit=False)
+            post.owner = request.user
+            post.save()
+            form.save()
             return redirect('/')
             # return redirect(post_detail, post.pk)
     else:
