@@ -1,11 +1,12 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Post
 from .forms import PostForm
+from textblob import TextBlob
 
-# Create your views here.
+# Create your views here - POSTS.
 def get_index(request): 
     if request.user.is_authenticated:
-        blogs = Post.objects.filter(owner=request.user)
+        blogs = Post.objects.all()
     else: 
         blogs = Post.objects.all()
     return render(request, 'posts/index.html', {'blogs': blogs})
@@ -21,9 +22,9 @@ def create_or_edit_post(request, pk=None):
         form = PostForm(request.POST, request.FILES, instance=post)
         if form.is_valid():
             post = form.save(commit=False)
-            post.owner = request.user
+            if not post.owner:
+                post.owner = request.user
             post.save()
-            form.save()
             return redirect('/')
             # return redirect(post_detail, post.pk)
     else:

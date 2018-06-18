@@ -13,7 +13,8 @@ class Post(models.Model):
   views = models.IntegerField(default=0)
   tag = models.CharField(max_length=30, blank=True, null=True)
   image = models.ImageField(upload_to="images", blank=True, null=True)
-  owner = models.ForeignKey(User, related_name='blogs', null=False, on_delete=models.CASCADE)
+  owner = models.ForeignKey(User, related_name='blogs', null=True, default= 1, on_delete=models.SET_NULL)
+  # if you have SET_NULL and for the on_delete and null=True, then the user will show up as "none" if you delete the user. If you have SET_DEFAULT, it will transfer ownership to the admin if the user who posted is deleted. 
   
   def __str__(self):
     return self.title
