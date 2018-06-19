@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth import logout, authenticate, login
-from .forms import UserLoginForm, UserRegistrationForm
+from .forms import UserLoginForm, UserRegistrationForm, PhotoForm
+from posts.models import Post
 # Create your views here - ACCOUNTS.
 
 def do_login(request):
@@ -44,7 +45,15 @@ def register(request):
     return render(request, 'accounts/register.html', {'form': registration_form})
     
 def profile(request):
-    return render(request, 'accounts/profile.html')
+    posts = Post.objects.all()
+    if request.method == "POST":
+        form = PhotoForm(request.POST, request.FILES)
+        if form.is_valid():
+            photo = form.save()
+            return render(request, 'accounts/profile.html', {'form':form}, {'posts', posts})
+    else:
+        form = PhotoForm()
+    return render(request, 'accounts/profile.html', {'form':form}, {'posts': posts})
     
 def do_logout(request): 
     logout(request)

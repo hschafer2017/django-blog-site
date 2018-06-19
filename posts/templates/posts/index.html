@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-md-2 col-sm-3 text-center">
                 <a class="story-img" href="#">
-                    <img src="{% static 'images/profile.jpg' %}" class="img-circle" width='60px' height='60px'>
+                    <img src="{{MEDIA_URL}}avatars/{{blog.owner.username}}.jpg" class="img-circle" width='60px' height='60px'>
                 </a>
                 <p><span class="boldtext">Author:</span> {{blog.owner}}</p>
             </div>
@@ -19,7 +19,8 @@
                         <img src="{{MEDIA_URL}}{{blog.image}}" width="200px"></img>
                         <p><span class="boldtext">Published on:</span> {{ blog.published_date }} </p>
                         <p><span class="boldtext">Views:</span> {{blog.views}}</p>
-                        <p><span class="boldtext">Tag:</span> {{ blog.tag }}</p>
+                        <p><span class="boldtext">Tag:</span> #{{ blog.tag }}</p>
+                         <p><span class="boldtext">Likes:</span> {{blog.likes.all | length}}</p>
                     </div>
                 </div>
             </div>

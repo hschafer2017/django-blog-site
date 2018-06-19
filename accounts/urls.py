@@ -16,6 +16,6 @@ urlpatterns = [
     path('password-reset/done/', password_reset_done, name='password_reset_done'),
     url(r'^password-reset/(?P<uidb64>[0-9A-Za-z]+)-(?P<token>.+)/$', password_reset_confirm,
         {'post_reset_redirect': reverse_lazy('password_reset_complete')}, name='password_reset_confirm'),
-        path('password-reset/complete/', password_reset_complete, name='password_reset_complete')
+    path('password-reset/complete/', password_reset_complete, name='password_reset_complete'),
     
     ]

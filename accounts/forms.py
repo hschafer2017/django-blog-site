@@ -39,3 +39,11 @@ class UserRegistrationForm(UserCreationForm):
             raise ValidationError("Passwords do not match")
 
         return password2
+        
+from django.forms import ModelForm
+from .models import Photo
+
+class PhotoForm(ModelForm):
+    class Meta:
+        model = Photo
+        fields = ['image']

@@ -2,8 +2,24 @@
 {% load bootstrap_tags %}
 {% load static from staticfiles %}
 {% block content %}
+
 <h3>Profile</h3>
 <p>Welcome to your BookWorm library, {{user}}!</p>
+
+<img src="{{MEDIA_URL}}avatars/{{request.user}}.jpg" class="img-circle" width='60px' height='60px'>
+
+
 <p>{{user.email}}</p>
+<p>Likes:</p>
+{% for post in user.liked_posts.all %}
+<li><a href="{% url 'post_detail' post.id %}">{{post.title}}</a></li>
+{% endfor %} 
+
+<br>
+<form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form | as_bootstrap }}
+        <button type="submit" class="btn btn-info">Save</button>
+    </form>
 
 {% endblock content %}
