@@ -22,7 +22,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__fil
 DEBUG = os.environ.get('DEBUG')
 
 
-ALLOWED_HOSTS = ['django-blog-haleyschafer.c9users.io']
+ALLOWED_HOSTS = ['django-blog-haleyschafer.c9users.io', 'hschafer-blogs.herokuapp.com']
+
 
 
 # Application definition
