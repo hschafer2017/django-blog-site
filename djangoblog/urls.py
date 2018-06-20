@@ -19,7 +19,7 @@ from django.conf.urls import url, include
 from posts.views import get_index
 from django.views.generic import RedirectView
 from django.views.static import serve
-from .settings import MEDIA_ROOT
+from django.conf import settings
 from posts import urls as posts_urls
 from accounts import urls as accounts_urls
 
@@ -27,5 +27,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(posts_urls)),
     path('accounts/', include(accounts_urls)),
-    path('media/<path:path>', serve, {'document_root': MEDIA_ROOT }),
+    path('media/<path:path>', serve, {'document_root': settings.MEDIA_ROOT }),
 ]
